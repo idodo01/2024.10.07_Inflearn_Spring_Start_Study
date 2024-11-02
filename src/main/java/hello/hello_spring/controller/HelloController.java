@@ -29,7 +29,11 @@ public class HelloController {
     @ResponseBody // html의 body가 아닌, http의 body부에 해당 내용을 직접 넣겠다
     // 해당 페이지에서 소스보기를 했을 때
     // string을 보내면, string만 딱 나옴 (원래는 html 다 나왔지)
-    public String helloString(@RequestParam(name) String nameStr) {
+    
+    // 내부적은 개념을 설명하자면, 
+    // 원래는 viewResolver가 동작했다면
+    // 대신에 HttpMessageConverter가 동작하게 됨
+    public String helloString(@RequestParam("name") String nameStr) {
         return "텍스트만 바로 출력할 수 있다!"; // html이 아닌 텍스트가 화면에 바로 출력됨
         // ex. "hello 홍길동"
     }
@@ -41,7 +45,7 @@ public class HelloController {
         HelloClass hello = new HelloClass(); // 객체생성
         hello.setName(nameStr1);
         return hello; // json 방식으로 출력됨
-        // ex. {"name":"이름을입력해보자"}
+        // ex. {"name":"이름을입력해보자"}`
     }
 
     static class HelloClass {
